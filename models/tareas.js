@@ -1,4 +1,7 @@
 const Tarea = require("./tarea");
+const {leerDB} = require ("../helpers/guardarDB.js") 
+
+ const arregloDB=leerDB()
 
 
 class Tareas {
@@ -18,6 +21,18 @@ class Tareas {
            listado.push(tarea)//añadimos al arreglo 
         })
         return listado
+    }
+
+    cargarTareasFromArray(tareas=[]){
+        
+        tareas.forEach(key=>{
+            
+            this._listado[key.id] = key
+        })
+        
+        //this._listado=tareas
+       
+
     }
 
     crearTarea(desc=""){//creamos el desc ya que las tareas reciben una descripcion como parametro 

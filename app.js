@@ -13,7 +13,7 @@ const main = async()=>{
     const tareasDB = leerDB();
 
     if( tareasDB ){
-       
+       tareas.cargarTareasFromArray(tareasDB)
     }
 
     await pausa();//para hacer ua pausa dandole al enter continuaremos 
@@ -29,13 +29,14 @@ const main = async()=>{
             break;
 
             case "2":
-
-                console.log(tareasDB)
+                tareas.cargarTareasFromArray(tareasDB)
+                console.log(tareas._listado)
             break;
 
         }
 
 
+        guardarDB(tareas.listadoArreglo)
 
         await pausa();
 
