@@ -1,36 +1,41 @@
 require("colors");
-const Tareas = require ('./models/tareas.js')
-const {guardarDB,leerDB}=require('./helpers/guardarDB.js')
-const {inquirerMenu , pausa , leerInput} = require ('./helpers/inquirer')
+const Tareas = require('./models/tareas.js')
+const { guardarDB, leerDB } = require('./helpers/guardarDB.js')
+const { inquirerMenu, pausa, leerInput } = require('./helpers/inquirer')
 
 
-const main = async()=>{
+const main = async () => {
 
-    let opt="";
+    let opt = "";
 
     const tareas = new Tareas();
 
     const tareasDB = leerDB();
 
-    if( tareasDB ){
-       tareas.cargarTareasFromArray(tareasDB)
+    if (tareasDB) {
+        tareas.cargarTareasFromArray(tareasDB)
     }
 
-    await pausa();//para hacer ua pausa dandole al enter continuaremos 
-
-    do{
+    
+    do {
         //Imprimir el menu 
-        opt= await inquirerMenu();
-        
-        switch (opt){
-            case "1": 
-            const desc = await leerInput('Descripcion:')//leer input del usuario
-            tareas.crearTarea(desc);//guardar el input del usuario como una nueva tarea
-            break;
+        opt = await inquirerMenu();
+
+        switch (opt) {
+            case "1":
+                const desc = await leerInput('Descripcion:')//leer input del usuario
+                tareas.crearTarea(desc);//guardar el input del usuario como una nueva tarea
+                break;
 
             case "2":
-                tareas.cargarTareasFromArray(tareasDB)
-                console.log(tareas._listado)
+                // tareas.cargarTareasFromArray(tareasDB)
+                tareas.listadoCompleto()
+                break;
+            case '3':
+                    tareas.listarPendientesCompletadas(true)
+            break;
+            case '4':
+                tareas.listarPendientesCompletadas(false)
             break;
 
         }
@@ -40,7 +45,7 @@ const main = async()=>{
 
         await pausa();
 
-    }while(opt!=="0")
+    } while (opt !== "0")
 
 
 }
