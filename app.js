@@ -1,7 +1,7 @@
 require("colors");
 const Tareas = require('./models/tareas.js')
 const { guardarDB, leerDB } = require('./helpers/guardarDB.js')
-const { inquirerMenu, pausa, leerInput } = require('./helpers/inquirer')
+const { inquirerMenu, pausa, leerInput,listarBorrarTarea, seguroBorrar } = require('./helpers/inquirer')
 
 
 const main = async () => {
@@ -24,19 +24,34 @@ const main = async () => {
         switch (opt) {
             case "1":
                 const desc = await leerInput('Descripcion:')//leer input del usuario
+                if(desc!=0){
                 tareas.crearTarea(desc);//guardar el input del usuario como una nueva tarea
+            }
                 break;
 
             case "2":
                 // tareas.cargarTareasFromArray(tareasDB)
                 tareas.listadoCompleto()
                 break;
-            case '3':
+            case '3': //listar completadas
                     tareas.listarPendientesCompletadas(true)
             break;
-            case '4':
+            case '4': //listar pendientes
                 tareas.listarPendientesCompletadas(false)
             break;
+
+            case '6': //borrar
+               const id = await listarBorrarTarea(tareas.listadoArreglo)
+               //el await es importante dejarlo ya que es asi q vamos a poder seleccionar una tarea
+               
+               const answer = await seguroBorrar()
+               //este inquirer es de tipo confirm y el mismo recibe un valor booleano
+               
+               if(answer){tareas.borrarTarea(id)
+                    console.log("Tarea Borrada");
+            }
+               
+                break;
 
         }
 

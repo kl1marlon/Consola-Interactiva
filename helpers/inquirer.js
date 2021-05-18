@@ -75,17 +75,60 @@ const leerInput =async(message)=>{
             return true ;
         }  
     }]
-        const {desc} = await inquirer.prompt(question);
+    console.log("Para salir presione 0");   
+    const {desc} = await inquirer.prompt(question);
     
         // en esta linea de codigo estamos llamando al prompt 
+
+       
         
         return desc;
         //hacemos el return de desc ya que siendo un objeto es lo que en realidad quiero que me muestre en pantalla luego de ejecutarse 
-    
+
+    }
+
+    const listarBorrarTarea = async(tareas = [])=>{
+
+
+        const choices = tareas.map((tarea,i)=>{ //con el map transformamos la data que recibimos a lo que queramos
+            const idx=`${i+1}.`.green
+
+            return {
+                value: tarea.id,
+                name:`${idx} ${tarea.descripcion}` 
+            }
+        })
+
+        const preguntas = [
+            {
+                type:"list",
+                name:"id",
+                message:"Borrar",
+                choices //aqui se estan guardando las opcines que son las que definimos con el .map
+            }
+        ]
+        const {id}=await inquirer.prompt(preguntas)
+       return id;
+    }
+
+    const seguroBorrar  =async (message)=>{
+        const question =[
+            {type:"confirm",//el tipo confirm recibe un valor booleano de yes or not 
+             name:"answer",
+             message
+        }
+
+        ]
+
+
+        const {answer}=await inquirer.prompt(question);
+        return answer
     }
 
 module.exports={
     inquirerMenu,
     pausa,
-    leerInput
+    leerInput,
+    listarBorrarTarea,
+    seguroBorrar
 }
