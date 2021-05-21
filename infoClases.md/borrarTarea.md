@@ -22,5 +22,8 @@ lo que hace es trasnformar los valores del arreglo
         console.log(choices)
 
     
-por ejemplo este es .map lo que hara es transformar los arreglos con el mensaje hola 
+por ejemplo este es .map lo que hara es transformar los arreglos con el mensaje hola
+
+
+
 

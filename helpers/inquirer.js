@@ -99,6 +99,11 @@ const leerInput =async(message)=>{
             }
         })
 
+        choices.unshift({
+            value: "0",
+            name: "0.".green + "Cancelar"
+        });
+
         const preguntas = [
             {
                 type:"list",

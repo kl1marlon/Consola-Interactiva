@@ -43,12 +43,14 @@ const main = async () => {
             case '6': //borrar
                const id = await listarBorrarTarea(tareas.listadoArreglo)
                //el await es importante dejarlo ya que es asi q vamos a poder seleccionar una tarea
-               
-               const answer = await seguroBorrar()
-               //este inquirer es de tipo confirm y el mismo recibe un valor booleano
-               
-               if(answer){tareas.borrarTarea(id)
-                    console.log("Tarea Borrada");
+               if(id!=="0"){
+                const answer = await seguroBorrar()
+                //este inquirer es de tipo confirm y el mismo recibe un valor booleano
+                
+                if(answer){tareas.borrarTarea(id)
+                     console.log("Tarea Borrada");
+               }
+             
             }
                
                 break;
