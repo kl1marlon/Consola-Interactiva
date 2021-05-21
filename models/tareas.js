@@ -95,7 +95,7 @@ class Tareas {
                 if (completadoEn){
 
                     contador +=1; 
-                    console.log(`${contador.toString().green} ${descripcion}:: ${completadoEn} `);
+                    console.log(`${contador.toString().green} ${descripcion} completada en fecha :: ${completadoEn.green} `);
                 }
             }else{
                 if(!completadoEn){
@@ -108,6 +108,23 @@ class Tareas {
            
         })      
 
+    }
+
+    toggleCompletadoen(ids = []) {
+        ids.forEach(id=>{ // asi vamos a recorrer todo el arreglo que estamos recibiendo 
+
+            
+            const tarea = this._listado[id];//asignamos a la variable tarea todo el arreglo de listado
+
+            if(!tarea.completadoEn){
+
+                tarea.completadoEn = new Date().toISOString() 
+                //estamos asignandole completadoEn el valor de la fecha en la que ha sido completada la tarea
+                //con toISOString() 
+
+            }
+            
+        })
     }
 
 

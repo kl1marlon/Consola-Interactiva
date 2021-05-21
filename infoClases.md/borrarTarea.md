@@ -25,5 +25,9 @@ lo que hace es trasnformar los valores del arreglo
 por ejemplo este es .map lo que hara es transformar los arreglos con el mensaje hola
 
 
+notas 
+unshift:
+propiedad utilizada para añadir una propiedad al principio del arreglo 
+
 
 

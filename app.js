@@ -1,7 +1,12 @@
 require("colors");
 const Tareas = require('./models/tareas.js')
 const { guardarDB, leerDB } = require('./helpers/guardarDB.js')
-const { inquirerMenu, pausa, leerInput,listarBorrarTarea, seguroBorrar } = require('./helpers/inquirer')
+const { inquirerMenu, 
+        pausa,
+        leerInput,
+        listarBorrarTarea, 
+        seguroBorrar,
+        mostrarListadoCheckList } = require('./helpers/inquirer')
 
 
 const main = async () => {
@@ -39,7 +44,12 @@ const main = async () => {
             case '4': //listar pendientes
                 tareas.listarPendientesCompletadas(false)
             break;
-
+            
+            case '5': //seleccione varias tareas (completar)
+                const ids=await  mostrarListadoCheckList(tareas.listadoArreglo)
+                tareas.toggleCompletadoen(ids)
+                break;
+            
             case '6': //borrar
                const id = await listarBorrarTarea(tareas.listadoArreglo)
                //el await es importante dejarlo ya que es asi q vamos a poder seleccionar una tarea
