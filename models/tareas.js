@@ -125,6 +125,16 @@ class Tareas {
             }
             
         })
+
+        this.listadoArreglo.forEach(tarea=>{
+            if(!ids.includes(tarea.id))//includes devuelve un booleano si existe o no lo que estamos preguntando 
+                this._listado[tarea.id].completadoEn=null 
+    //si la tarea esta completada y la desmarco esta va a pasar a tener el valor de null
+    
+            {
+
+            }
+        })
     }
 
 
